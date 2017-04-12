@@ -1,0 +1,313 @@
+{
+  "current": {
+    "color_body_bg": "#ffffff",
+    "color_body_text": "#1c1d1d",
+    "color_borders": "#1c1d1d",
+    "color_primary": "#1c1d1d",
+    "color_secondary": "#a26b25",
+    "color_product_background": "#f7f7f7",
+    "color_sale_tag": "#990000",
+    "color_input": "#f6f6f6",
+    "color_newsletter": "#f6f6f6",
+    "color_drawer_background": "#1c1d1d",
+    "color_drawer_text": "#ffffff",
+    "color_drawer_border": "#343535",
+    "color_drawer_button": "#a26b25",
+    "color_drawer_button_text": "#ffffff",
+    "type_header_family": "Google_Montserrat_400_sans",
+    "type_header_base_size": "30px",
+    "type_header_border_thickness": "1px",
+    "type_accent_family": "Google_Montserrat_400_sans",
+    "type_accent_transform": true,
+    "type_accent_spacing": true,
+    "type_base_family": "Google_Montserrat_400_sans",
+    "type_base_size": "16px",
+    "type_base_italize_titles": true,
+    "cart_type": "drawer",
+    "cart_notes_enable": false,
+    "social_facebook_link": "https:\/\/www.facebook.com\/pages\/Factory-WTF\/262399847191637?fref=ts",
+    "social_twitter_link": "https:\/\/twitter.com\/factorywtf",
+    "social_pinterest_link": "",
+    "social_instagram_link": "http:\/\/instagram.com\/factorywtf",
+    "social_snapchat_link": "",
+    "social_google_plus_link": "",
+    "social_tumblr_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "social_fancy_link": "",
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": false,
+    "favicon": "",
+    "checkout_header_image": "",
+    "checkout_logo_image": "",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Helvetica Neue",
+    "checkout_body_font": "Helvetica Neue",
+    "checkout_accent_color": "#a26b25",
+    "checkout_button_color": "#000000",
+    "checkout_error_color": "#ff6d6d",
+    "checkout_banner_background_color": "#fff",
+    "checkout_call_to_action_color": "#a26b25",
+    "checkout_use_header_image": false,
+    "collection_products_grid": "collage",
+    "collection_sort_enable": false,
+    "collection_tags_enable": true,
+    "customer_layout": "customer_area",
+    "favicon_enable": false,
+    "footer_newsletter_enable": true,
+    "footer_quicklinks_enable": true,
+    "header_search_enable": false,
+    "hero_home_auto": true,
+    "home_featured_collections_sort": "auto",
+    "home_featured_products_grid": "collage",
+    "home_hero_auto_speed": "7000",
+    "product_vendor_enable": false,
+    "product_zoom_enable": true,
+    "social_sharing_style": "clean",
+    "sections": {
+      "slideshow": {
+        "type": "slideshow",
+        "blocks": {
+          "slideshow-0": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/foto.jpg",
+              "slide_text_color": "is-light",
+              "slide_subheading": "",
+              "slide_heading": "",
+              "slide_cta": "",
+              "slide_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "slideshow-0"
+        ],
+        "settings": {
+          "hero_home_auto": true,
+          "home_hero_auto_speed": "5000"
+        }
+      },
+      "newsletter": {
+        "type": "newsletter",
+        "settings": {}
+      },
+      "drawer-menu": {
+        "type": "drawer-menu",
+        "settings": {
+          "drawer_top_link_list": "main-menu",
+          "drawer_bottom_link_list": "footer",
+          "drawer_search_enable": false
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "main_menu_link_list": "main-menu",
+          "logo": "shopify:\/\/shop_images\/logo-black.png",
+          "logo-inverted": "shopify:\/\/shop_images\/logo.png",
+          "logo_max_width": "",
+          "search": "modal"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_link_list": "footer"
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "collection_products_grid": "grid",
+          "collection_tags_enable": false,
+          "product_vendor_enable": false
+        }
+      },
+      "1491553946277": {
+        "type": "featured-products",
+        "settings": {
+          "title": "Lookbook",
+          "home_featured_products": "frontpage",
+          "collection_products_grid": "grid"
+        }
+      },
+      "1491554094037": {
+        "type": "featured-row",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/onas.jpg",
+          "layout": "right",
+          "title": "FACTORY WTF S.R.O.",
+          "text": "<p>M&oacute;dna značka WTF?! funguje na trhu od roku 2011. Za jej vznikom stoja mlad&iacute; a&nbsp;energick&iacute; n&aacute;vrh&aacute;ri Milan &Scaron;ving&aacute;l a&nbsp;Klementina Tomrecaj, ktor&iacute; maj&uacute; niekoľkoročn&eacute; sk&uacute;senosti v&nbsp;oblasti m&oacute;dy a&nbsp;stylingu.<\/p>\r\n<p>&nbsp;<\/p>\r\n<p>Na začiatku svojej existencie sa do povedomia verejnosti dostali najm&auml; spolupr&aacute;cou s&nbsp;viacer&yacute;mi zn&aacute;mymi tv&aacute;rami slovenskej kult&uacute;rnej, hudobnej, ale aj &scaron;portovej sc&eacute;ny. Za zmienku stoja men&aacute; ako Majk Spirit, Bacil a&nbsp;Rakby, Tina, Patr&iacute;cia Vittekov&aacute;, Erika Jud&iacute;nyova, Adela Ban&aacute;&scaron;ov&aacute;, tanečn&aacute; skupina Ladylicious, futbalisti Vladimir Weiss ml., Martin &Scaron;krtel, tenistka Dominika Cibulkov&aacute; a&nbsp;mnoh&iacute; ďal&scaron;&iacute;, ktor&iacute; si značku WTF?! obľ&uacute;bili.<\/p>\r\n<p>&nbsp;<\/p>\r\n<p>Značka WTF?! svojim z&aacute;kazn&iacute;kom pon&uacute;ka &scaron;irok&yacute; sortiment vr&aacute;tane tepl&aacute;kov&yacute;ch s&uacute;prav, tričiek, mik&iacute;n, korzetov, sukn&iacute;, spoločensk&yacute;ch a&nbsp;večern&yacute;ch &scaron;iat, čiapok, &scaron;iltoviek a&nbsp;ďal&scaron;&iacute;ch doplnkov. Každ&yacute; k&uacute;sok je origin&aacute;lny a&nbsp;&scaron;t&yacute;lov&yacute;. Značka sa okrem viackusov&yacute;ch kolekci&iacute; venuje aj z&aacute;kazkovej v&yacute;robe, pri ktorej n&aacute;vrh&aacute;ri spolupracuj&uacute; so z&aacute;kazn&iacute;kom tak, aby v&yacute;sledn&yacute; produkt niesol ducha značky WTF?! a&nbsp;z&aacute;roveň dokonale kore&scaron;pondoval s&nbsp;vkusom z&aacute;kazn&iacute;ka a vyzdvihol v&scaron;etky jeho kvality.<\/p>\r\n<p>&nbsp;<\/p>\r\n<p>Značka WTF?! nie je o&nbsp;fyzickom veku, je o&nbsp;vn&uacute;tornom pocite. Je určen&aacute; pre v&scaron;etk&yacute;ch ľud&iacute;, ktor&iacute; sa neboja vytŕčať z&nbsp;davu a vyjadriť svoje origin&aacute;lne JA.<\/p>",
+          "button_label": "",
+          "button_link": "",
+          "anchor": "onas"
+        }
+      },
+      "custom-footer": {
+        "type": "custom-footer",
+        "settings": {}
+      },
+      "featured-collections": {
+        "type": "featured-collections",
+        "blocks": {
+          "1491723441280": {
+            "type": "collection",
+            "settings": {
+              "collection": "boys"
+            }
+          },
+          "1491723446981": {
+            "type": "collection",
+            "settings": {
+              "collection": "girls"
+            }
+          }
+        },
+        "block_order": [
+          "1491723441280",
+          "1491723446981"
+        ],
+        "settings": {
+          "title": "WTF?!"
+        }
+      }
+    },
+    "content_for_index": [
+      "1491553946277",
+      "newsletter",
+      "1491554094037"
+    ]
+  },
+  "presets": {
+    "Brooklyn": {
+      "cart_type": "drawer",
+      "cart_notes_enable": false,
+      "checkout_accent_color": "#a26b25",
+      "checkout_banner_background_color": "#fff",
+      "checkout_button_color": "#000000",
+      "checkout_call_to_action_color": "#a26b25",
+      "checkout_use_header_image": false,
+      "collection_products_grid": "collage",
+      "collection_sort_enable": false,
+      "collection_tags_enable": true,
+      "color_body_bg": "#ffffff",
+      "color_body_text": "#1c1d1d",
+      "color_borders": "#1c1d1d",
+      "color_drawer_background": "#1c1d1d",
+      "color_drawer_border": "#343535",
+      "color_drawer_button": "#a26b25",
+      "color_drawer_button_text": "#ffffff",
+      "color_drawer_text": "#ffffff",
+      "color_input": "#f6f6f6",
+      "color_newsletter": "#f6f6f6",
+      "color_primary": "#1c1d1d",
+      "color_product_background": "#f7f7f7",
+      "color_sale_tag": "#990000",
+      "color_secondary": "#a26b25",
+      "customer_layout": "customer_area",
+      "favicon_enable": false,
+      "footer_newsletter_enable": true,
+      "footer_quicklinks_enable": true,
+      "header_search_enable": false,
+      "hero_home_auto": true,
+      "home_featured_collections_sort": "auto",
+      "home_featured_products_grid": "collage",
+      "home_hero_auto_speed": "7000",
+      "product_vendor_enable": false,
+      "product_zoom_enable": true,
+      "share_facebook": true,
+      "share_pinterest": true,
+      "share_twitter": true,
+      "social_sharing_style": "clean",
+      "type_accent_family": "Google_Montserrat_400_sans",
+      "type_accent_spacing": true,
+      "type_accent_transform": true,
+      "type_base_family": "Google_Arapey_400_serif",
+      "type_base_italize_titles": true,
+      "type_base_size": "16px",
+      "type_header_base_size": "30px",
+      "type_header_border_thickness": "1px",
+      "type_header_family": "Google_Old+Standard+TT_400_serif",
+      "sections": {
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "slideshow-0": {
+              "type": "slide",
+              "settings": {}
+            },
+            "slideshow-1": {
+              "type": "slide",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "slideshow-0",
+            "slideshow-1"
+          ],
+          "settings": {}
+        },
+        "featured-products": {
+          "type": "featured-products",
+          "settings": {
+            "home_featured_products": "frontpage"
+          }
+        },
+        "featured-content": {
+          "type": "featured-content",
+          "blocks": {
+            "featured-content-0": {
+              "type": "text",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "featured-content-0"
+          ],
+          "settings": {}
+        },
+        "featured-collections": {
+          "type": "featured-collections",
+          "blocks": {
+            "featured-collections-0": {
+              "type": "collection",
+              "settings": {}
+            },
+            "featured-collections-1": {
+              "type": "collection",
+              "settings": {}
+            },
+            "featured-collections-2": {
+              "type": "collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "featured-collections-0",
+            "featured-collections-1",
+            "featured-collections-2"
+          ],
+          "settings": {}
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "featured-content",
+        "featured-collections",
+        "featured-products",
+        "newsletter"
+      ]
+    }
+  }
+}
