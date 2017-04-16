@@ -49,6 +49,15 @@
     };
   </script>
 
+  {% if template contains 'product' %}
+      <script>
+        // Set a global variable for theme.js to use on product single init
+        window.theme = window.theme || {};
+        theme.moneyFormat = {{ shop.money_format | json }};
+        theme.productSingleObject = {{ product | json }};
+      </script>
+  {% endif %}
+
   <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
   <!--[if lte IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
 

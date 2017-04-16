@@ -387,6 +387,20 @@ theme.Images = (function() {
   };
 })();
 
+
+slate.simplifyVariantLabels = function (product) {
+  // option_selection.js does not add a label if there is only one variant option.
+  // Add one as long as it is not 'Title' (Shopify's default), add one.
+  if (product.options.length === 1 && product.options[0] !== 'Title') {
+    $('.selector-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0">'+ product.options[0] +'</label>');
+  }
+
+  // Hide variant dropdown if only one exists and title contains 'Default'
+  if (product.variants.length && product.variants[0].title.indexOf('Default') >= 0) {
+    $('.selector-wrapper').hide();
+  }
+};
+
 /**
  * Variant Selection scripts
  * ------------------------------------------------------------------------------
@@ -1811,6 +1825,429 @@ window.theme = window.theme || {};
 
 theme.Product = (function() {
   function Product(container) {
+
+    this.selectors = {
+      html: $('html'),
+      addToCartBtn: $('#AddToCart'),
+      productPrice: $('#ProductPrice'),
+      comparePrice: $('#ComparePrice'),
+      comparePriceA11y: $('#ComparePriceA11y'),
+      priceA11y: $('#PriceA11y'),
+      addToCartText: $('#AddToCartText'),
+      productImageWrap: $('#ProductPhoto'),
+      productFeaturedImage: $('#ProductPhotoImg'),
+      productSinglePhotos: $('.product-single__photos'),
+      productThumbs: $('#ProductThumbs').find('.product-single__thumbnail'),
+      productImageGallery: $('.gallery__item'),
+      tabTrigger: $('.tab-switch__trigger'),
+      tabContent: $('.tab-switch__content'),
+      SKU: $('.variant-sku')
+    };
+
+    var $container = this.$container = $(container);
+    var sectionId = $container.attr('data-section-id');
+
+    if (!$('#ProductJson-' + sectionId).html()) {
+      return;
+    }
+
+    this.zoomType = $container.data('image-zoom-type');
+    this.showExtraTab = $container.data('show-extra-tab');
+    this.extraTabContent = $container.data('extra-tab-content');
+    this.cartEnableAjax = $container.data('cart-enable-ajax');
+
+    this.productSingleObject = JSON.parse(document.getElementById('ProductJson-' + sectionId).innerHTML);
+
+    this.init();
+  }
+
+  Product.prototype = _.assignIn({}, Product.prototype, {
+    init: function(){
+      this.stringOverrides();
+      this.cacheSelectors();
+      this.initProductVariant();
+      this.initBreakpoints();
+      this.initThumbnails();
+
+      if (this.cartEnableAjax) {
+        this.enableAjax();
+      }
+
+      if (!theme.variables.bpSmall && this.zoomType == 'zoom-in') {
+        productImageZoom();
+      } else if (!theme.variables.bpSmall && this.zoomType == 'lightbox') {
+        this.productImageGallery();
+      }
+
+      if (!this.showExtraTab || this.extraTabContent) {
+        this.initProductTabs();
+      }
+
+    },
+
+    stringOverrides: function() {
+      // Override defaults in theme.strings with potential
+      // template overrides
+
+      theme.productStrings = theme.productStrings || {};
+      $.extend(theme.strings, theme.productStrings);
+    },
+
+    cacheSelectors: function() {
+      window.cache = window.cache || {};
+      $.extend(window.cache, {
+        $html: $('html'),
+        $addToCartBtn: $(this.selectors.addToCartBtn),
+        $productPrice: $(this.selectors.productPrice),
+        $comparePrice: $(this.selectors.comparePrice),
+        $comparePriceA11y: $(this.selectors.comparePriceA11y),
+        $priceA11y: $(this.selectors.priceA11y),
+        $addToCartText: $(this.selectors.addToCartText),
+        $productImageWrap: $(this.selectors.productImageWrap),
+        $productFeaturedImage: $(this.selectors.productFeaturedImage),
+        $productSinglePhotos: $(this.selectors.productSinglePhotos),
+        $productThumbs: $(this.selectors.productThumbs),
+        $productImageGallery: $(this.selectors.productImageGallery),
+        $tabTrigger: $(this.selectors.tabTrigger),
+        $tabContent: $(this.selectors.tabContent),
+        $SKU: $(this.selectors.SKU)
+      });
+    },
+
+    initBreakpoints: function() {
+      var self = this;
+      var zoomType = $('#ProductSection').data('image-zoom-type');
+
+      if (!cache.$html.hasClass('lt-ie9')) {
+        enquire.register(theme.variables.mediaQuerySmall, {
+          match: function() {
+            if (zoomType == 'zoom-in') {
+              if (cache.$productImageWrap.length) {
+                // remove event handlers for product zoom on mobile
+                cache.$productImageWrap.trigger('zoom.destroy');
+                cache.$productSinglePhotos.off();
+                cache.$productSinglePhotos.removeClass('image-zoom');
+              }
+            } else if (zoomType == 'lightbox') {
+              // remove event handlers for lightbox on mobile
+              cache.$productImageGallery.off();
+              cache.$productSinglePhotos.find('img').removeClass('lightbox');
+            }
+
+            theme.variables.bpSmall = true;
+          },
+          unmatch: function() {
+            if (zoomType == 'zoom-in') {
+              // reinit product zoom
+              cache.$productImageWrap.addClass('image-zoom').zoom({
+                url: cache.$productFeaturedImage.attr('data-zoom')
+              });
+            } else if (zoomType == 'lightbox') {
+              // reinit lightbox
+              self.productImageGallery();
+              cache.$productSinglePhotos.find('img').addClass('lightbox');
+            }
+
+            theme.variables.bpSmall = false;
+          }
+        });
+      }
+    },
+
+    productImageGallery: function() {
+      if (!cache.$productImageGallery.length) {
+        return;
+      };
+
+      cache.$productImageGallery.magnificPopup({
+        type: 'image',
+        mainClass: 'mfp-fade',
+        closeOnBgClick: true,
+        closeBtnInside: false,
+        closeOnContentClick: true,
+        tClose: theme.strings.zoomClose,
+        removalDelay: 500,
+        callbacks: {
+          open: function(){
+            $('html').css('overflow-y','hidden');
+          },
+          close: function(){
+            $('html').css('overflow-y','');
+          }
+        },
+        gallery: {
+          enabled: true,
+          navigateByImgClick: false,
+          arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"><span class="mfp-chevron mfp-chevron-%dir%"></span></button>',
+          tPrev: theme.strings.zoomPrev,
+          tNext: theme.strings.zoomNext
+        }
+      });
+
+      cache.$productFeaturedImage.bind('click', function() {
+        var imageId = $(this).attr('data-image-id');
+        cache.$productImageGallery.filter('[data-image-id="' + imageId + '"]').trigger('click');
+      });
+    },
+
+    initThumbnails: function () {
+      if (!cache.$productThumbs.length) {
+        return;
+      }
+
+      var self = this;
+
+      // Switch the main image with one of the thumbnails
+      // Note: this does not change the variant selected, just the image
+      cache.$productThumbs.on('click', function(evt) {
+        evt.preventDefault();
+        var newImage = $(this).attr('href');
+        var newImageId = $(this).attr('data-image-id');
+        self.switchProductImage(newImage, { id: newImageId }, cache.$productFeaturedImage);
+      });
+    },
+
+    initProductVariant: function() {
+      var self = this;
+      var product = this.productSingleObject;
+
+      // Pre-loading product images to avoid a lag when a thumbnail is clicked, or
+      // when a variant is selected that has a variant image. Change 'large' to
+      // what fits your theme.
+      Shopify.Image.preload(theme.productSingleObject.images, 'large');
+
+      var selectCallback = function(variant, selector) {
+        self.productPage({
+          money_format: theme.moneyFormat,
+          variant: variant,
+          selector: selector,
+          translations: {
+            add_to_cart : theme.productStrings.addToCart,
+            sold_out : theme.productStrings.soldOut,
+            unavailable : theme.productStrings.unavailable
+          }
+        });
+      };
+
+      this.optionSelector = new Shopify.OptionSelectors('productSelect', {
+        product: product,
+        onVariantSelected: selectCallback,
+        enableHistoryState: true
+      });
+
+      // Clean up variant labels if the Shopify-defined
+      // defaults are the only ones left
+      slate.simplifyVariantLabels(theme.productSingleObject);
+    },
+
+    initProductTabs: function () {
+      if (!cache.$tabTrigger.length) {
+        return;
+      }
+
+      var $trigger = cache.$tabTrigger,
+          $content = cache.$tabContent,
+          $el,
+          link;
+
+      // Hide extra content areas with JS and set active tab
+      $content.filter(':gt(0)').addClass('is-hidden');
+      $trigger.first().addClass('is-active');
+
+      $trigger.on('click', function(evt) {
+        evt.preventDefault();
+        // set active tab
+        $trigger.removeClass('is-active');
+        $el = $(this).addClass('is-active');
+
+        // hide all content areas, then show desired one
+        link = $el.data('link');
+        $content.addClass('is-hidden');
+        $content.filter('[data-content="' + link + '"]').removeClass('is-hidden');
+      });
+    },
+
+    productPage: function (options) {
+      var self = this;
+      var moneyFormat = options.money_format;
+      var variant = options.variant;
+      var selector = options.selector;
+      var translations = options.translations;
+
+      if (variant) {
+        // Update variant image, if one is set
+        if (variant.featured_image) {
+          var newImg = variant.featured_image,
+              el = cache.$productFeaturedImage[0];
+          Shopify.Image.switchImage(newImg, el, self.switchProductImage);
+        }
+
+        // Update the product price
+        cache.$productPrice.html(Shopify.formatMoney(variant.price, theme.moneyFormat));
+
+        // Update and show the product's compare price if necessary
+        if (variant.compare_at_price > variant.price) {
+          cache.$comparePrice.html(Shopify.formatMoney(variant.compare_at_price, theme.moneyFormat)).removeClass('hide');
+          cache.$productPrice.addClass('product-single__price--on-sale');
+          cache.$comparePriceA11y.attr('aria-hidden', 'false');
+          cache.$priceA11y.attr('aria-hidden', 'false');
+        } else {
+          cache.$comparePrice.addClass('hide');
+          cache.$productPrice.removeClass('product-single__price--on-sale');
+          cache.$comparePriceA11y.attr('aria-hidden', 'true');
+        }
+
+        // Select a valid variant if available
+        if (variant.available) {
+          // We have a valid product variant, so enable the submit button
+          cache.$addToCartBtn.prop('disabled', false);
+          cache.$addToCartText.html(theme.strings.addToCart);
+        } else {
+          // Variant is sold out, disable the submit button and change the text
+          cache.$addToCartBtn.prop('disabled', true);
+          cache.$addToCartText.html(theme.strings.soldOut);
+        }
+        // Show SKU
+        cache.$SKU.html(variant.sku);
+      } else {
+        // The variant doesn't exist, disable submit button and change the text.
+        // This may be an error or notice that a specific variant is not available.
+        cache.$addToCartBtn.prop('disabled', true);
+        cache.$addToCartText.html(theme.strings.unavailable);
+      }
+    },
+
+    enableAjax: function () {
+      cache.$addToCartBtn.on('click', function(evt) {
+        evt.preventDefault();
+        $('.errors').remove();
+        var $addToCartBtn = $(this),
+            $addToCartForm = $(this).closest('form'),
+            $addToCartText = $(this).find('span');
+        if ($addToCartForm.length) {
+          $addToCartBtn
+            .data('add-to-cart', $addToCartText.text())
+            .prop('disabled', true)
+            .addClass('btn--ajax-disabled');
+          $.ajax({
+            url: '/cart/add.js',
+            dataType: 'json',
+            type: 'post',
+            data: $addToCartForm.serialize(),
+            success: function(lineItem) {
+              // reupdate cart count
+              theme.afterCartLoad();
+              $addToCartBtn.prop('disabled', false);
+              $addToCartBtn.removeClass('btn--ajax-disabled');
+              addToCartflip($addToCartBtn);
+            },
+            error: function(XMLHttpRequest, textStatus) {
+              var data = eval('(' + XMLHttpRequest.responseText + ')');
+              var response = data.description;
+              var status = XMLHttpRequest.status;
+              $addToCartBtn.removeClass('btn--ajax-disabled');
+              if (status === 422 && $('#ProductSelect option').length === 1) {
+                $addToCartText.text(theme.strings.soldOut);
+              }
+              else {
+                $addToCartBtn.prop('disabled', false);
+                $addToCartText.text($addToCartBtn.data('add-to-cart'));
+              }
+              $addToCartBtn.after('<p class="errors">' + response + '</p>');
+            }
+          });
+        }
+      });
+    },
+
+    switchProductImage: function (src, imgObject, el) {
+      var zoomType = $('#ProductSection').data('image-zoom-type');
+
+      // Make sure element is a jquery object
+      var $el = $(el);
+      $el.attr('src', src);
+      $el.attr('data-image-id', imgObject.id);
+      if (!theme.variables.bpSmall && zoomType == 'zoom-in') {
+        var self = this;
+        // Update new image src to grande
+        var zoomSrc = src.replace('_medium.','_1024x1024.').replace('_large.','_1024x1024.').replace('_grande.','_1024x1024.');
+        $el.attr('data-zoom', zoomSrc);
+
+        $(function() {
+          productImageZoom();
+        });
+      }
+    }
+
+  });
+
+  function productImageZoom() {
+    var zoomType = $('#ProductSection').data('image-zoom-type');
+
+    if (!theme.variables.bpSmall && zoomType == 'zoom-in'){
+      if (!cache.$productImageWrap.length || cache.$html.hasClass('supports-touch')) {
+        return;
+      };
+
+      // Destroy zoom (in case it was already set), then set it up again
+      cache.$productImageWrap.trigger('zoom.destroy');
+
+      cache.$productImageWrap.addClass('image-zoom').zoom({
+        url: cache.$productFeaturedImage.attr('data-zoom')
+      });
+    }
+  }
+
+  function backButton(evt) {
+    evt.preventDefault();
+
+    var referrerDomain = urlDomain(document.referrer);
+    var shopDomain = urlDomain(window.location.href);
+
+    // redirect to previous page if last history item is from the shops domain
+    // otherwise follow link.
+    if (shopDomain === referrerDomain) {
+      history.back();
+      return false;
+    }
+
+    function urlDomain(url) {
+      var    a      = document.createElement('a');
+             a.href = url;
+      return a.hostname;
+    }
+  }
+
+  function addToCartflip($addToCartBtn) {
+    $addToCartBtn.addClass('btn--unflipped').hide();
+
+    $('<button></button>')
+      .text(theme.strings.continueShopping)
+      .addClass('btn btn--continue-shopping btn--secondary')
+      .click(backButton)
+      .insertAfter($addToCartBtn);
+
+    $('<button></button>')
+      .text(theme.strings.viewCart)
+      .addClass('btn btn--view-cart')
+      .click(function(evt) {
+        evt.preventDefault();
+        window.location.href = '/cart';
+      })
+      .insertAfter($addToCartBtn);
+
+    $('.single-option-selector, [name="quantity"]').bind('click', function() {
+      $(this).closest('form').find('.btn--view-cart, .btn--continue-shopping, .errors').remove();
+      $(this).closest('form').find('.btn--unflipped').removeClass('.btn--unflipped').show();
+    });
+  }
+
+  return Product;
+})();
+
+/*
+theme.Product = (function() {
+  function Product(container) {
     var $window = $(window);
 
     this.settings = {
@@ -1874,6 +2311,23 @@ theme.Product = (function() {
   }
 
   Product.prototype = _.assignIn({}, Product.prototype, {
+    initThumbnails: function () {
+      if (!cache.$productThumbs.length) {
+        return;
+      }
+
+      var self = this;
+
+      // Switch the main image with one of the thumbnails
+      // Note: this does not change the variant selected, just the image
+      cache.$productThumbs.on('click', function(evt) {
+        evt.preventDefault();
+        var newImage = $(this).attr('href');
+        var newImageId = $(this).attr('data-image-id');
+        self.switchProductImage(newImage, { id: newImageId }, cache.$productFeaturedImage);
+      });
+    },
+
     initProductVariant: function() {
       var options = {
         $container: this.$container,
@@ -2090,10 +2544,10 @@ theme.Product = (function() {
       var productCopyHeight = $meta.outerHeight();
       var productImagesHeight = $(this.selectors.productImages).height();
 
-      /*============================================================================
-        Calculate when to detach fixed element to avoid content overlap.
-        Subtract product copy height from the limit because plugin uses offset().top
-      ==============================================================================*/
+      //============================================================================
+      //  Calculate when to detach fixed element to avoid content overlap.
+      //  Subtract product copy height from the limit because plugin uses offset().top
+      //==============================================================================*
       var calcLimit = $wrapper.offset().top + $wrapper.height();
       calcLimit -= productCopyHeight;
 
@@ -2116,6 +2570,7 @@ theme.Product = (function() {
 
   return Product;
 })();
+*/
 
 window.theme = window.theme || {};
 
