@@ -240,7 +240,8 @@
       "save_html": "Save<br \/>{{ saved_amount }}",
       "collection_return": "Back to {{ collection }}",
       "sale_price": "Sale price",
-      "regular_price": "Regular price"
+      "regular_price": "Regular price",
+      "related_products_title": "You might also like"
     },
     "product": {
       "sold_out": "Sold Out",
