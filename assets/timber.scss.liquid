@@ -308,7 +308,7 @@ $breakpoints: (
   'small' '(max-width: #{$small})',
   'medium' '(min-width: #{$postSmall}) and (max-width: #{$medium})',
   'medium-down' '(max-width: #{$medium})',
-  'medium-up' '(min-width: #{$medium})',
+  'medium-up' '(min-width: #{$postSmall})',
   'large' '(min-width: #{$large})'
 );
 $breakpoint-has-widths: ('small', 'medium', 'medium-down', 'medium-up', 'large');
@@ -2076,6 +2076,7 @@ $socialIconFontStack: 'icons';
 /*================ Module-specific styles ================*/
 /*================ Module | Footer ================*/
 .site-footer {
+  padding-top: $gutter;
   padding-bottom: $gutter;
 
   @include at-query ($max, $small) {

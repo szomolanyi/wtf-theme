@@ -16,6 +16,11 @@
     <header class="site-header" role="banner">
       <div class="wtfwrapper">
         <div class="grid--full grid--table">
+          {% comment %}
+          toto je hamburger na lavej strane
+          pre small medium
+          po kliku otvara drawer menu definovany v theme.liquid
+          {% endcomment %}
           <div class="grid__item large--hide one-quarter">
             <div class="site-nav--mobile">
               <button type="button" class="icon-fallback-text site-nav__link js-drawer-open-left" aria-controls="NavDrawer">
@@ -24,6 +29,11 @@
               </button>
             </div>
           </div>
+
+          {% comment %}
+          toto je logo
+          vzdy, meni sa len dlzka
+          {% endcomment %}
           <div class="grid__item large--one-third medium-down--one-half">
             {% comment %}
               Use the uploaded logo from theme settings if enabled.
@@ -66,6 +76,13 @@
               </div>
             {% endif %}
           </div>
+
+          {% comment %}
+          toto je rozbalene menu aj s lupomou a cartom ;
+          small, medium schovane
+          large : hamburger + lupa + cart, ale len do cca 800
+          large : menu + lupa + cart
+          {% endcomment %}
           <div class="grid__item large--two-thirds large--text-right medium-down--hide">
             {% comment %}
               List out your main-menu linklist (default)
@@ -161,6 +178,12 @@
             </ul>
             <!-- //site-nav -->
           </div>
+
+          {% comment %}
+          toto je len cart
+          small, medium
+          po kliku otvara drawer cart definovany v theme.liquid
+          {% endcomment %}
           <div class="grid__item large--hide one-quarter">
             <div class="site-nav--mobile text-right">
               <a href="/cart" class="site-nav__link cart-link js-drawer-open-right" aria-controls="CartDrawer">

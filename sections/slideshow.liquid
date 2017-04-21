@@ -57,7 +57,12 @@
               {% endif %}
             {% endif %}
             <div class="hero__text-wrap">
+
               <div class="hero__text-align">
+                <div class="wtfslidemenu medium-down--hide">
+                  {% include 'left-menu' %}
+                </div>
+
                 <div class="hero__text-content">
                   {% unless block.settings.slide_subheading == blank %}
                     <p class="hero__subtitle">
@@ -76,6 +81,7 @@
                   {% endunless %}
                 </div>
               </div>
+
             </div>
           </div>
 

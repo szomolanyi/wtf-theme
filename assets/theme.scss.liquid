@@ -2641,6 +2641,14 @@ $slick-opacity-not-active: 0.25;
   white-space: normal;
 }
 
+.site-nav__item--vertical {
+  display: block;
+  > ul {
+    left: 90%;
+    top: 10%;
+  }
+}
+
 .site-nav__link {
   @include transition('color 0.2s, opacity 0.1s');
   @include accentFontStack;
@@ -3694,4 +3702,11 @@ ul.gallery {
 }
 .product-single__featured-image-wrapper {
   margin-bottom: $gutter;
+}
+/*   wth left menu in slide show */
+.wtfslidemenu {
+  display: table-cell;
+  width: 200px;
+  height: 100%;
+  color: white;
 }
