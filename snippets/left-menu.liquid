@@ -11,7 +11,7 @@
         - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
     {% endcomment %}
     {% assign child_list_handle = link.title | handleize %}
-    {% if linklists[child_list_handle].links != blank %}
+    {% if linklists[child_list_handle].links != blank and 1==2 %}
       <li class="site-nav__item site-nav__item--vertical site-nav__expanded-item site-nav--has-dropdown{% unless template.name == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless%}" aria-haspopup="true">
         <a href="{{ link.url }}" class="site-nav__link">
           {{ link.title }}
