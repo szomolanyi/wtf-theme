@@ -5,7 +5,7 @@
     "color_borders": "#1c1d1d",
     "color_primary": "#1c1d1d",
     "color_secondary": "#a26b25",
-    "color_product_background": "#f7f7f7",
+    "color_product_background": "#ffffff",
     "color_sale_tag": "#990000",
     "color_input": "#f6f6f6",
     "color_newsletter": "#f6f6f6",
@@ -177,6 +177,16 @@
         ],
         "settings": {
           "title": "WTF?!"
+        }
+      },
+      "wtf-header": {
+        "type": "wtf-header",
+        "settings": {
+          "main_menu_link_list": "main-menu",
+          "logo": "shopify:\/\/shop_images\/logo-black.png",
+          "logo-inverted": "shopify:\/\/shop_images\/logo.png",
+          "logo_max_width": "180",
+          "search": "modal"
         }
       }
     },

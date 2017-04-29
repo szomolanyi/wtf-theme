@@ -1,0 +1,152 @@
+<footer class="site-footer small--text-center wtffooter--bgcolor" role="contentinfo">
+  <!--
+  <div class="wrapper">
+  -->
+
+    <div class="grid-uniform valign">
+      <div class="grid__item one-quarter small--one-whole">
+        <ul class="no-bullets social-icons wtfsocial">
+            {% if settings.social_facebook_link != blank %}
+              <li class="wtfsocial__item">
+                <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">
+                  <span class="icon icon-facebook" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_twitter_link != blank %}
+              <li class="wtfsocial__item">
+                <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                  <span class="icon icon-twitter" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_pinterest_link != blank %}
+              <li class="wtfsocial__item">
+                <a href="{{ settings.social_pinterest_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Pinterest' }}">
+                  <span class="icon icon-pinterest" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_instagram_link != blank %}
+              <li class="wtfsocial__item">
+                <a href="{{ settings.social_instagram_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
+                  <span class="icon icon-instagram" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_snapchat_link != blank %}
+              <li class="wtfsocial__item">
+                <a href="{{ settings.social_snapchat_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Snapchat' }}">
+                  <span class="icon icon-snapchat" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_google_plus_link != blank %}
+              <li class="wtfsocial__item">
+                <a href="{{ settings.social_google_plus_link }}" rel="publisher" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Google Plus' }}">
+                  <span class="icon icon-google_plus" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_tumblr_link != blank %}
+              <li class="wtfsocial__item">
+                <a href="{{ settings.social_tumblr_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Tumblr' }}">
+                  <span class="icon icon-tumblr" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_youtube_link != blank %}
+              <li class="wtfsocial__item">
+                <a href="{{ settings.social_youtube_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'YouTube' }}">
+                  <span class="icon icon-youtube" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_vimeo_link != blank %}
+              <li class="wtfsocial__item">
+                <a href="{{ settings.social_vimeo_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Vimeo' }}">
+                  <span class="icon icon-vimeo" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% endif %}
+            {% if settings.social_fancy_link != blank %}
+              <li class="wtfsocial__item">
+                <a href="{{ settings.social_fancy_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Fancy' }}">
+                  <span class="icon icon-fancy" aria-hidden="true"></span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+      </div>
+      <div class="grid__item one-quarter small--one-whole">
+        OBCHODNÉ PODMIENKY
+      </div>
+	  <div class="grid__item one-quarter small--one-whole">
+        REKLAMAČNÝ PORIADOK
+      </div>
+      <div class="grid__item one-quarter small--one-whole wtffooter__logo">
+        <div class="wtffooter__logo">
+        <div>
+        {{ 'wtf-footer-logo.png' | asset_url | img_tag:'WTF logo' }}
+        </div>
+        <div>
+          Všetky práva vyhradené
+        </div>
+        <div>
+          factory WTF &copy; 2016
+        </div>
+        </div>
+      </div>
+    </div>
+  <!--
+  </div>
+  -->
+</footer>
+
+{% schema %}
+  {
+    "name": "CustomFooter",
+    "settings": []
+  }
+{% endschema %}
+
+
+{% stylesheet 'scss' %}
+.wtffooter--bgcolor {
+	background-color: black;
+	color: white;
+}
+.wtfsocial {
+	display: flex;
+	justify-content: center;
+	li {
+		span {
+			color: white;
+		}
+		padding: 5px;
+	}
+}
+.wtffooter__logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-size: 0.6em;
+}
+
+.valign {
+	font-size:0;
+}
+.valign > [class*="grid__item"] {
+	display: inline-block;
+	float: none;
+	font-size: 1rem;
+	vertical-align: middle;
+	> ul {
+		margin-bottom:0;
+	}
+}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
