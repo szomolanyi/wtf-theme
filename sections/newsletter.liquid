@@ -7,6 +7,7 @@
           <div class="note form-success">{{ 'general.newsletter_form.newsletter_confirmation' | t }}</div>
         </div>
       {% else %}
+        <div class="wtfnewsletter__title">{{ 'general.newsletter_form.newsletter_title' | t }}</div>
         <label for="Email" class="newsletter__label hidden-label">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
         <input type="hidden" name="contact[tags]" value="newsletter">
         <div class="newsletter--form">
@@ -43,3 +44,17 @@
     "blocks" : []
   }
 {% endschema %}
+
+{% stylesheet 'scss' %}
+.wtfnewsletter__title {
+  font-size: 2em;
+}
+.wtfcontact__title {
+  font-size: 2.7em;
+  font-weight: bold;
+}
+.wtfcontact--spacer {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+{% endstylesheet %}

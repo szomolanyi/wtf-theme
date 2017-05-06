@@ -35,7 +35,8 @@
       }
     },
     "newsletter_form": {
-      "newsletter_email": "Sign up to our mailing list",
+      "newsletter_title": "Want to know more?! Sign up to our mailing list",
+      "newsletter_email": "Your email",
       "newsletter_confirmation": "Thanks for subscribing",
       "submit": "Subscribe"
     },

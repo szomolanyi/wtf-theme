@@ -38,7 +38,8 @@
       }
     },
     "newsletter_form": {
-      "newsletter_email": "Chcem byť informovaný o novinkách emailom",
+      "newsletter_title": "Chceš vedieť viac?!",
+      "newsletter_email": "Tvoj email",
       "newsletter_confirmation": "Ďakujeme za záujem o naše novinky",
       "submit": "Odoberať"
     },
@@ -318,7 +319,7 @@
       "gift_card_depleted": "Darčeková poukážka už bola vyčerpaná",
       "gift_card_disabled": "Darčeková poukážka je zablokovaná",
       "gift_card_expired": "Darčeková poukážka expirovala",
-      "invalid": "je zablokovaná",
+      "invalid": "is invalid",
       "taken": "bola prevzatá",
       "contains_html_tags": "nesmie obsahovať HTML značky",
       "too_short": "príliš krátke (minimum je {{ count }} znakov)",
