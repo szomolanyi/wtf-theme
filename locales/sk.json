@@ -65,9 +65,10 @@
       "name": "Meno",
       "email": "Email",
       "phone": "Telefónne číslo",
-      "message": "Správa",
-      "send": "Poslať",
-      "post_success": "Ďakujeme, že ste nás kontaktovali. Odpovieme čo najskôr."
+      "message": "wtf!?WTF!?wtf!?",
+      "send": "Odoslať!?",
+      "post_success": "Ďakujeme, že ste nás kontaktovali. Odpovieme čo najskôr.",
+      "title": "MÁŠ NA NÁS OTÁZKY ?"
     }
   },
   "customer": {

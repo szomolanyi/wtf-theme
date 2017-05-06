@@ -188,10 +188,15 @@
           "logo_max_width": "180",
           "search": "modal"
         }
+      },
+      "wtf-contact": {
+        "type": "wtf-contact",
+        "settings": {}
       }
     },
     "content_for_index": [
       "1491553946277",
+      "wtf-contact",
       "newsletter",
       "1491554094037"
     ]
@@ -270,6 +275,10 @@
           "settings": {
             "home_featured_products": "frontpage"
           }
+        },
+        "wtf-contact": {
+          "type": "wtf-contact",
+          "settings": {}
         },
         "featured-content": {
           "type": "featured-content",
